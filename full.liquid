@@ -1,0 +1,41 @@
+<div class="screen">
+  <div class="view view--full">
+    <div class="layout">
+      <div class="columns">
+        <div class="column">
+          <div class="markdown">
+            <h2 style="text-align: center; font-size: 14px; margin-bottom: 4px;">
+              Air Quality Near You
+            </h2>
+            <p style="text-align: center; font-size: 12px; margin-top: 0;">
+              Sensors Found: {{ meta.found }}
+            </p>
+            {% for location in results %}
+              <div class="location-block" style="margin-bottom: 10px;">
+                <div class="location-name" style="font-weight: bold; text-align: center; font-size: 13px;">
+                  {{ location.name }}
+                </div>
+                <div class="pollutants" style="font-size: 11px;">
+                  {% for param in location.parameters %}
+                    <div class="row" style="display: flex; justify-content: space-between; padding: 2px 0;">
+                      <div class="pollutant-name" style="text-align: right; flex: 1; padding-right: 10px;">
+                        {{ param.displayName | default: param.parameter | upcase }}
+                      </div>
+                      <div class="pollutant-unit" style="text-align: left; flex: 1;">
+                        {{ param.unit }}
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="title-bar" style="position: absolute; bottom: 0; width: 100%; background-color: black; color: white; text-align: center; padding: 4px 0; font-size: 13px;">
+    OpenAQ Sensor Overview
+  </div>
+</div>
